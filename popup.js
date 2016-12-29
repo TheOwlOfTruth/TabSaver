@@ -48,14 +48,12 @@ function saveTabs(name) {
     listOutNames(name);
   }
 
-  function openTabs(name){
+function openTabs(name){
     chrome.storage.local.get('nameList', function(callBack){
       for(i = 0; i < callBack.nameList.length; i++){
         if(callBack.nameList[i].name == name){
-          for(j = 0; j < callBack.nameList[i].tabURL.length; j++){
-            window.open(callBack.nameList[i].tabURL[j]);
-          }
-        break;
+          chrome.windows.create({url: callBack.nameList[i].tabURL});
+          break;
         }
       }
     })
