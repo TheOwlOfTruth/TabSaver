@@ -10,6 +10,9 @@
 <html>
   <head>
     <title></title>
+    <link rel="stylesheet" href="./material/material.min.css">
+    <script src="./material/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
@@ -21,8 +24,21 @@
 
       }
       .menu_button{
-        font-size: 85%;
+        /*font-size: 85%;*/
         padding: 3px 6px;
+        clear: both;
+        height: 50px;
+        width: 200px;
+      }
+      .fixed-width{
+        width: 75%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .button-icon{
+        float: left;
+        vertical-align: text-bottom;;
       }
       br {
         line-height: 0px;
@@ -40,12 +56,25 @@
   <body>
     <!-- <div class="menu" id="Save">Save</div>
     <div class="menu" id="Open">Open</div> -->
-    <form><p id = "textTitle">File Name: </p><input type = "text" id = "userInput"></form>
-    <button type="button" class="menu_button" id="save">Save</button>
-    <button type="button" class="menu_button" id="open">Open</button>
-    <button type="button" class="menu_button" id="delete">Delete</button>
-    <button type="button" class="menu_button" id="clear">Clear All</button>
-      <ul id = "list" style="list-style: none"></ul>
+    <form id="inputForm">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label fixed-width" id="inputDiv">
+      <input type="text" class="mdl-textfield__input" id="userInput"></input>
+      <label class="mdl-textfield__label" for="userInput">File Name: </label>
+      </div>
+    </form>
+
+    <button type="button" class="menu_button mdl-button mdl-js-button mdl-js-ripple-effect" id="save">
+      <i class="material-icons button-icon">save</i>Save
+    </button>
+    <button type="button" class="menu_button mdl-button mdl-js-button mdl-js-ripple-effect" id="open">
+      <i class="material-icons button-icon">open_in_browser</i>Open
+    </button>
+    <button type="button" class="menu_button mdl-button mdl-js-button mdl-js-ripple-effect" id="delete">
+      <i class="material-icons button-icon">delete</i>Delete</button>
+    <button type="button" class="menu_button mdl-button mdl-js-button mdl-js-ripple-effect" id="clear">
+      <i class="material-icons button-icon">delete_forever</i>Clear All
+    </button>
+    <ul id = "list" style="list-style: none" class='mdl-list'></ul>
     <div id="status"></div>
   </body>
 </html>

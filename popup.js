@@ -1,5 +1,3 @@
-
-
 function renderStatus(statusText) {
   document.getElementById('status').textContent = statusText;
 }
@@ -48,7 +46,7 @@ function saveTabs(name) {
     listOutNames(name);
   }
 
-function openTabs(name){
+  function openTabs(name){
     chrome.storage.local.get('nameList', function(callBack){
       for(i = 0; i < callBack.nameList.length; i++){
         if(callBack.nameList[i].name == name){
@@ -74,14 +72,22 @@ function openTabs(name){
     });
   }
 
-  function listOutNames() {
+function listOutNames() {
   var ul = document.getElementById("list");
-  chrome.storage.local.get("nameList", function(callBack){
-    for(i = 0; i < callBack.nameList.length; i++)
-    {
+  chrome.storage.local.get('nameList', function(callBack){
+    for(i = 0; i < callBack.nameList.length; i++){
       var li = document.createElement("li");
-      li.appendChild(document.createTextNode(callBack.nameList[i].name + "\n"));
+      li.appendChild(document.createTextNode(callBack.nameList[i].name));
+      li.className = "mdl-list__item";
       ul.appendChild(li);
+    }
+  });
+}
+
+function readOutNames() {
+  chrome.storage.local.get("nameList", function(callback) {
+    for(i = 0; i < callback.nameList.length; i++){
+      console.log(callback.nameList[i].name);
     }
   });
 }
@@ -91,13 +97,14 @@ document.addEventListener('DOMContentLoaded', function() {
   var li = document.createElement("li");
   li.appendChild(document.createTextNode("Sets of Tabs\n"));
   listOutNames();
+
   document.getElementById("save").addEventListener("click", function(){
+
     name = document.getElementById("userInput").value;
-    document.getElementById("userInput").remove();
-    document.getElementById("textTitle").remove();
+    document.getElementById("inputForm").remove();
     document.getElementById("open").remove();
     document.getElementById("save").remove();
-    document.getElementById("delete").remove();    
+    document.getElementById("delete").remove();
     document.getElementById("clear").remove();
     saveTabs(name);
     document.getElementById("list").remove();
@@ -105,10 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById("open").addEventListener("click", function(){
     name = document.getElementById("userInput").value;
-    document.getElementById("userInput").remove();
-    document.getElementById("textTitle").remove();
+    document.getElementById("inputForm").remove();
     document.getElementById("open").remove();
-    document.getElementById("delete").remove();    
+    document.getElementById("delete").remove();
     document.getElementById("save").remove();
     document.getElementById("clear").remove();
     openTabs(name);
@@ -116,10 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById("clear").addEventListener("click", function(){
-    document.getElementById("userInput").remove();
-    document.getElementById("textTitle").remove();
+    document.getElementById("inputForm").remove();
     document.getElementById("open").remove();
-    document.getElementById("delete").remove();    
+    document.getElementById("delete").remove();
     document.getElementById("save").remove();
     document.getElementById("clear").remove();
     document.getElementById("list").remove();
@@ -132,12 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById("delete").addEventListener("click", function(){
     var name = document.getElementById("userInput").value;
-    document.getElementById("userInput").remove();
-    document.getElementById("textTitle").remove();
+    document.getElementById("inputForm").remove();
     document.getElementById("open").remove();
     document.getElementById("save").remove();
     document.getElementById("clear").remove();
-    document.getElementById("delete").remove(); 
+    document.getElementById("delete").remove();
     document.getElementById("list").remove();
     deleteSingular(name);
     renderStatus(name + " Deleted!");
